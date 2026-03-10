@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnackTrack — Campus Dining Reimagined</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================================
+     Navbar
+     ============================================ -->
+<nav>
+  <div class="nav-logo" onclick="go('home')">
+    <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="20" fill="#0AAFE0"/>
+      <path d="M12 20C12 15.58 15.58 12 20 12C24.42 12 28 15.58 28 20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="4" fill="white"/>
+      <path d="M20 24V28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    SnackTrack
+  </div>
+
+  <div class="nav-links">
+    <button class="nav-link active" id="nl-home" onclick="go('home')">Home</button>
+    <button class="nav-link" id="nl-menu" onclick="go('store-hrb')">Menus</button>
+    <button class="nav-link" id="nl-plan" onclick="go('home')">Planning</button>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input placeholder="Search healthy food...">
+    </div>
+    <div class="cart-btn" onclick="go('checkout')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/>
+        <circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <div class="cart-badge">3</div>
+    </div>
+    <div class="avatar">AJ</div>
+  </div>
+</nav>
+
+
+<!-- ============================================
+     Home Page
+     ============================================ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div>
+      <div class="hero-badge">⭐ Featured Vendor of the Month</div>
+      <h1>Eat Better,<br><span>Study Smarter.</span></h1>
+      <p>Explore curated menus from campus favorites, optimized for your nutritional goals and schedule.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="go('store-hrb')">Explore Vendors</button>
+        <button class="btn-secondary" onclick="go('store-hrb')">How it Works</button>
+      </div>
+    </div>
+    <div class="hero-img">🥗</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="chip active" onclick="filterVC(this, 'all')">All</button>
+    <button class="chip" onclick="filterVC(this, 'salads')">Salads</button>
+    <button class="chip" onclick="filterVC(this, 'grills')">Grills</button>
+    <button class="chip" onclick="filterVC(this, 'asian')">Asian</button>
+    <button class="chip" onclick="filterVC(this, 'healthy')">Healthy</button>
+    <button class="chip" onclick="filterVC(this, 'budget')">Budget</button>
+    <div style="flex:1"></div>
+    <button class="chip">⚙ Filters</button>
+    <button class="chip">🔍 Find a vendor...</button>
+  </div>
+
+  <div class="vendors-grid">
+
+    <div class="vendor-card" data-cat="salads healthy" onclick="go('store-hrb')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7)">
+        🥗
+        <div class="badge-open">Open Now</div>
+        <div class="vc-tag">Salads & Bowls</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Healthy Rice Bowlz</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.8</div>
+        </div>
+        <div class="vc-desc">Fresh, organic bowls crafted with locally sourced greens and house-made dressings.</div>
+        <div class="vc-meta"><span>⏱ 10 min</span><span>🌿 Low-Carb Options</span></div>
+      </div>
+    </div>
+
+    <div class="vendor-card" data-cat="grills healthy" onclick="go('store-pp')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#FFF7ED,#FED7AA)">
+        🥩
+        <div class="badge-open">Open Now</div>
+        <div class="vc-tag">Grills & Meat</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Protein Palace</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.5</div>
+        </div>
+        <div class="vc-desc">The ultimate stop for athletes. High protein meals designed to fuel your workouts.</div>
+        <div class="vc-meta"><span>⏱ 15 min</span><span>💪 Muscle Gain</span></div>
+      </div>
+    </div>
+
+    <div class="vendor-card" data-cat="asian" onclick="go('store-ww')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6)">
+        🍜
+        <div class="badge-closed">Closed</div>
+        <div class="vc-tag">Asian Fusion</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Wok Wonders</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.2</div>
+        </div>
+        <div class="vc-desc">Authentic flavors from across Asia, prepared fresh with vibrant vegetables.</div>
+        <div class="vc-meta"><span>⏱ 12 min</span><span>🥢 Stir-fry Experts</span></div>
+      </div>
+    </div>
+
+    <div class="vendor-card" data-cat="budget" onclick="go('store-dd')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#F1F5F9,#E2E8F0)">
+        🥪
+        <div class="badge-closed">Closed</div>
+        <div class="vc-tag">Sandwiches</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Daily Deli</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.0</div>
+        </div>
+        <div class="vc-desc">Classic deli sandwiches and artisan wraps for the student on the go.</div>
+        <div class="vc-meta"><span>⏱ Closed</span><span>⚡ Fast Service</span></div>
+      </div>
+    </div>
+
+    <div class="vendor-card" data-cat="budget" onclick="go('store-pasta')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#FEF9C3,#FEF08A)">
+        🍝
+        <div class="badge-open">Open Now</div>
+        <div class="vc-tag">Italian</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Pasta Point</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.6</div>
+        </div>
+        <div class="vc-desc">Hand-stretched pasta and rich sauces inspired by traditional Italian kitchens.</div>
+        <div class="vc-meta"><span>⏱ 8 min</span><span>🍞 Carb Loading</span></div>
+      </div>
+    </div>
+
+    <div class="vendor-card" data-cat="healthy budget" onclick="go('store-zen')">
+      <div class="vc-img" style="background:linear-gradient(135deg,#F0FBFF,#E0F2FE)">
+        🥤
+        <div class="badge-open">Open Now</div>
+        <div class="vc-tag">Beverages</div>
+      </div>
+      <div class="vc-body">
+        <div class="vc-row">
+          <div class="vc-name">Zen Smoothie Bar</div>
+          <div class="vc-rating"><span style="color:#F59E0B">★</span> 4.9</div>
+        </div>
+        <div class="vc-desc">Nutrient-packed smoothies and cold-press juices to refresh your mind.</div>
+        <div class="vc-meta"><span>⏱ 5 min</span><span>🧠 Brain Power</span></div>
+      </div>
+    </div>
+
+  </div><!-- /vendors-grid -->
+
+  <div class="macro-banner">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#FEF3C7,#FDE68A);display:flex;align-items:center;justify-content:center;font-size:22px">✨</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:2px">Smart Macro Matching</div>
+        <div style="font-size:13px;color:var(--text-secondary)">Connect your student health profile to see personalized ratings for every store based on your protein, fiber, and calorie targets.</div>
+      </div>
+    </div>
+    <button class="btn-accent" onclick="go('store-hrb')">Setup Profile</button>
+  </div>
+
+  <footer>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--primary);margin-bottom:10px">
+        <svg width="26" height="26" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="20" fill="#0AAFE0"/>
+          <path d="M12 20C12 15.58 15.58 12 20 12C24.42 12 28 15.58 28 20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="4" fill="white"/>
+          <path d="M20 24V28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        SnackTrack
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;line-height:1.5">Smart campus dining at your fingertips. Order healthy, track macros, and save time.</p>
+      <div style="display:flex;gap:10px">
+        <div style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px">f</div>
+        <div style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px">📷</div>
+        <div style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px">🐦</div>
+      </div>
+    </div>
+    <div>
+      <h5>Discovery</h5>
+      <ul>
+        <li><a onclick="go('store-hrb')">Popular Stores</a></li>
+        <li><a onclick="go('store-hrb')">Healthy Picks</a></li>
+        <li><a>Student Discounts</a></li>
+        <li><a>New Arrivals</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Support</h5>
+      <ul>
+        <li><a>Help Center</a></li>
+        <li><a>Store Registration</a></li>
+        <li><a>Privacy Policy</a></li>
+        <li><a>Terms of Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-budget-card">
+        <div class="f-budget-title">💰 Budget Tracker</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;line-height:1.5">Set your weekly meal budget and we'll help you stay on track with smart recommendations.</div>
+        <a style="color:var(--primary);font-size:13px;font-weight:600;cursor:pointer">Configure Budget →</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="footer-bottom">
+    <span>© 2026 CanteenConnect Inc. All rights reserved. · University Campus B</span>
+    <div class="fb-lnks">
+      <a>Terms of Service</a>
+      <a>Cookie Policy</a>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+
+<!-- ============================================
+     Store pages — injected by buildStore()
+     ============================================ -->
+<div id="page-store-hrb"   class="page"></div>
+<div id="page-store-pp"    class="page"></div>
+<div id="page-store-ww"    class="page"></div>
+<div id="page-store-dd"    class="page"></div>
+<div id="page-store-pasta" class="page"></div>
+<div id="page-store-zen"   class="page"></div>
+
+
+<!-- ============================================
+     Food detail pages — injected by buildFood()
+     ============================================ -->
+<div id="page-food-quinoa"      class="page"></div>
+<div id="page-food-chicken"     class="page"></div>
+<div id="page-food-med"         class="page"></div>
+<div id="page-food-tofu"        class="page"></div>
+<div id="page-food-steak"       class="page"></div>
+<div id="page-food-salmon"      class="page"></div>
+<div id="page-food-smoothie"    class="page"></div>
+<div id="page-food-eggs"        class="page"></div>
+<div id="page-food-pasta-bolo"  class="page"></div>
+<div id="page-food-pasta-aglio" class="page"></div>
+<div id="page-food-pasta-carb"  class="page"></div>
+
+
+<!-- ============================================
+     Checkout
+     ============================================ -->
+<div id="page-checkout" class="page">
+  <div class="co-layout">
+
+    <div>
+      <div class="co-title">Review & Checkout</div>
+      <div class="co-sub">Verify your nutrition goals and budget before confirming pickup.</div>
+
+      <div class="co-card">
+        <div class="co-card-title">🛒 Order Items (3)</div>
+
+        <div class="oi">
+          <div class="oi-img">🍱</div>
+          <div class="oi-info">
+            <div class="oi-name">Quinoa Power Bowl With Roasted Salmon</div>
+            <div class="oi-store">@ Healthy Rice Bowlz</div>
+            <div class="oi-macros">P: 32g · C: 45g · 480 kcal</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div class="oi-price">₱149.00</div>
+              <button class="del-btn">🗑</button>
+            </div>
+            <div class="oi-ctrl">
+              <button class="oi-qbtn">−</button>
+              <div class="oi-qv">1</div>
+              <button class="oi-qbtn">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="oi">
+          <div class="oi-img">🫐</div>
+          <div class="oi-info">
+            <div class="oi-name">Blueberry Protein Smoothie</div>
+            <div class="oi-store">@ Zen Smoothie Bar</div>
+            <div class="oi-macros">P: 20g · C: 15g · 180 kcal</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div class="oi-price">₱119.00</div>
+              <button class="del-btn">🗑</button>
+            </div>
+            <div class="oi-ctrl">
+              <button class="oi-qbtn">−</button>
+              <div class="oi-qv">1</div>
+              <button class="oi-qbtn">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="oi">
+          <div class="oi-img">🥚</div>
+          <div class="oi-info">
+            <div class="oi-name">Hard-Boiled Eggs (2pcs)</div>
+            <div class="oi-store">@ The Egg Shop</div>
+            <div class="oi-macros">P: 12g · C: 1g · 140 kcal</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div class="oi-price">₱25.00</div>
+              <button class="del-btn">🗑</button>
+            </div>
+            <div class="oi-ctrl">
+              <button class="oi-qbtn">−</button>
+              <div class="oi-qv">1</div>
+              <button class="oi-qbtn">+</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /co-card -->
+
+      <div class="suggest-card">
+        <div style="font-size:22px">📈</div>
+        <div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Smart Suggestion</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.5">
+            Adding a side of <strong>Steamed Broccoli</strong> (₱79.00) from 'The Green Fork' would complete your daily fiber target without exceeding your budget.
+          </div>
+          <a class="suggest-lnk">View nutrition breakdown →</a>
+        </div>
+      </div>
+    </div><!-- /left col -->
+
+    <div>
+
+      <div class="dp-card">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px">⏱ Daily Goal Progress</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600">
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--green)"></div>
+            Daily Budget
+          </div>
+          <div><span style="font-weight:700;font-size:14px">$14.75</span> <span style="font-size:12px;color:var(--text-muted)">/ $20.00</span></div>
+        </div>
+        <div class="bar-track" style="margin-bottom:14px">
+          <div class="bar-fill" style="width:74%;background:var(--green)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--text-muted)">PROTEIN</span>
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary)">64g / 80g</span>
+        </div>
+        <div class="bar-track" style="height:5px;margin-bottom:10px">
+          <div class="bar-fill" style="width:80%;background:var(--primary)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--text-muted)">CARBS</span>
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary)">61g / 200g</span>
+        </div>
+        <div class="bar-track" style="height:5px;margin-bottom:10px">
+          <div class="bar-fill" style="width:30%;background:#94A3B8"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--text-muted)">CALORIES</span>
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary)">800kcal / 2200kcal</span>
+        </div>
+        <div class="bar-track" style="height:5px;margin-bottom:10px">
+          <div class="bar-fill" style="width:36%;background:#475569"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);background:var(--bg);border-radius:8px;padding:10px;margin-top:4px">
+          ⓘ Progress includes current cart + estimated meals already consumed today based on your plan.
+        </div>
+      </div>
+
+      <div class="pickup-card">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px">Pickup Logistics</div>
+        <div class="sec-lbl">Pickup Time Slot</div>
+        <div class="pickup-time-box">⏰ 12:10 PM – 12:20 PM</div>
+        <div class="sec-lbl">Pickup Station</div>
+        <div class="station-opts">
+          <div class="station-opt" onclick="selStation(this)">
+            <div style="font-weight:600;font-size:13px;margin-bottom:2px">A: Place 1</div>
+            <div style="font-size:11px;color:var(--text-muted)">Express Counter</div>
+          </div>
+          <div class="station-opt selected" onclick="selStation(this)">
+            <div style="font-weight:600;font-size:13px;margin-bottom:2px">B: Place 2</div>
+            <div style="font-size:11px;color:var(--text-muted)">Locker Pickup</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pay-card">
+        <div class="totals">
+          <div class="total-row"><span>Subtotal</span><span>₱293.00</span></div>
+          <div class="total-row"><span>Campus Service Fee</span><span>₱0.50</span></div>
+        </div>
+        <div class="total-final"><span>Total</span><span>₱293.50</span></div>
+
+        <div class="sec-lbl" style="margin-top:16px">Payment Method</div>
+        <div class="pay-opt selected" onclick="selPay(this)">
+          <div class="pay-opt-left">
+            <div class="pay-opt-name">💳 Student ID Card</div>
+            <div class="pay-opt-sub">Bal: ₱42.50</div>
+          </div>
+          <div class="radio-out checked"><div class="radio-in"></div></div>
+        </div>
+        <div class="pay-opt" onclick="selPay(this)">
+          <div class="pay-opt-left">
+            <div class="pay-opt-name">📱 Digital Wallet</div>
+            <div class="pay-opt-sub">Gcash / Paymaya</div>
+          </div>
+          <div class="radio-out"></div>
+        </div>
+
+        <button class="place-btn" onclick="go('confirmation')">Place Order & Pay</button>
+        <div class="place-note">By clicking "Place Order", you agree to the CanteenConnect Campus Dining Policy.</div>
+      </div>
+
+    </div><!-- /right col -->
+  </div>
+</div><!-- /page-checkout -->
+
+
+<!-- ============================================
+     Payment Confirmation
+     ============================================ -->
+<div id="page-confirmation" class="page">
+  <div class="confirm-bg">
+    <div class="confirm-modal">
+
+      <div class="confirm-hdr">
+        <div class="success-icon">✓</div>
+        <div class="confirm-title">Payment Successful!</div>
+        <div class="confirm-email">We've sent a confirmation email to <span>alex.j@example.com</span></div>
+      </div>
+
+      <div class="confirm-body">
+        <div class="order-meta">
+          <div>
+            <div class="om-lbl">Order Number</div>
+            <div class="om-val">#BM-8849201</div>
+          </div>
+          <div style="text-align:right">
+            <div class="om-lbl">Date</div>
+            <div class="om-val">Oct 24, 2024</div>
+          </div>
+        </div>
+
+        <div class="pu-grid">
+          <div class="pu-box">
+            <span style="font-size:18px">⏰</span>
+            <div>
+              <div class="pu-lbl">Pickup Time</div>
+              <div class="pu-val">Today, 4:30–5:00 PM</div>
+            </div>
+          </div>
+          <div class="pu-box">
+            <span style="font-size:18px">📍</span>
+            <div>
+              <div class="pu-lbl">Pickup Location</div>
+              <div class="pu-val">Canteen Stall B</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="os-title">📋 Order Summary</div>
+        <div class="ci"><span>🍱</span><span class="ci-name">Quinoa Power Bowl With Roasted Salmon</span><span class="ci-qty">Qty: 1</span><span class="ci-price">₱149.00</span></div>
+        <div class="ci"><span>🫐</span><span class="ci-name">Blueberry Protein Smoothie</span><span class="ci-qty">Qty: 1</span><span class="ci-price">₱119.00</span></div>
+        <div class="ci"><span>🥚</span><span class="ci-name">Hard-Boiled Eggs (2pcs)</span><span class="ci-qty">Qty: 1</span><span class="ci-price">₱25.00</span></div>
+
+        <div class="ct-totals">
+          <div class="ct-row"><span>Subtotal</span><span>₱293.00</span></div>
+          <div class="ct-row"><span>Processing Fee</span><span>₱1.50</span></div>
+          <div class="ct-row"><span>Tax</span><span>₱4.20</span></div>
+          <div class="ct-final"><span>Total Amount Paid</span><span>₱298.70</span></div>
+        </div>
+
+        <div class="confirm-actions">
+          <button class="btn-outline">⬇ Download PDF</button>
+          <button class="btn-outline">↗ Share Receipt</button>
+        </div>
+        <button class="return-btn" onclick="go('home')">Return to Home</button>
+        <div class="tracking-lnk" onclick="go('home')">View detailed order tracking</div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- /page-confirmation -->
+
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
